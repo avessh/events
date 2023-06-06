@@ -1,0 +1,7 @@
+@media only screen and (max-width: 600px) {
+    .top-div{
+        /* background-color: yellow; */
+        padding: 15px 0px 0px 15px;
+        /* color: grey; */
+    }
+}

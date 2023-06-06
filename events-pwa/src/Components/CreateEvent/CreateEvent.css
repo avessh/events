@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+    margin: 0;
+    padding: 0;
+}
+
+@media only screen and (max-width: 600px) {
+
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: 'Rubik', sans-serif;
+    }
+   
+    #create-event-parent{
+        margin-top: 10px;
+        /* background-color: red; */
+        overflow: hidden;
+        width: 100vw !important;
+    }
+
+    .create-event-child{
+        width: 100%;
+        margin: 18px 0 0px 0px ;
+
+        padding: 15px;
+
+        background-color: whitesmoke;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+
+
+        /* border-radius: 20px; */
+
+      
+    }
+    ::placeholder {
+        color: black;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    #event-btn{
+        background-color:black ;
+        color: white;
+        padding: 20px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        /* margin: 20px; */
+    }
+
+    #btn-div{
+        /* background-color: red; */
+        margin: 10px 0 !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+   
+  }
