@@ -4,6 +4,7 @@ const express = require("express")
 const bodyParser = require('body-parser')
 const ChannelModel = require('./models/channel')
 const cors = require('cors')
+const multer = require('multer')
 
 
 const app = express()
@@ -33,6 +34,17 @@ mongoose.connect(uri, connectionParams).then(() => {
     console.log("error while connecting to database", e);
 })
 
+const fileStorageEngine = multer.diskStorage({
+    destination: (req , file , cb) => {
+        cb(null , './images' )
+    },
+    filename: (req , file , cb ) => {
+        cb(null , Date.now() + '---' + file.originalname)
+    }
+})
+
+const upload = multer({storage: fileStorageEngine})
+
 app.listen(PORT, () => {
     console.log(`listing on port ${PORT}`);
 })
@@ -57,12 +69,15 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
 
+app.post("/single" , upload.single('poster') , (req,res) => {
+     console.log(req.file);
+    res.send("single file uploaded successfuly")
+})
 
 
+// const url = req.protocol + '://' + hostname + req.file.filename;
 
-
-
-app.post("/insert", bodyParser.json(), async (req, res) => {
+app.post("/insert", bodyParser.json(),upload.single('poster'), async (req, res) => {
 
     try {
         const channel = new ChannelModel({
@@ -73,7 +88,8 @@ app.post("/insert", bodyParser.json(), async (req, res) => {
             invitees: req.body.invitees,
             location: req.body.location,
             message: req.body.message,
-            link: req.body.link
+            link: req.body.link,
+            poster:req.body.poster
 
 
         })
@@ -95,7 +111,7 @@ app.post("/insert", bodyParser.json(), async (req, res) => {
 //fetching api for database
 
 app.get("/fetch", urlencodedParser, (req, res) => {
-    ChannelModel.find({}).then((data) => {
+    ChannelModel.find({}).sort({event_date:1}).then((data) => {
         res.status(200).send(data)
         console.log(data);
     }).catch((e) => {

@@ -42,6 +42,9 @@ const channelSchema = new mongoose.Schema({
         // required: true,
         trim: true
 
+    },
+    poster: {
+        type: String
     }
 });
 

@@ -1,7 +1,10 @@
 @media only screen and (max-width: 600px) {
-    .top-div{
+    .top-div-home{
         /* background-color: yellow; */
-        padding: 15px 0px 0px 15px;
-        /* color: grey; */
+        padding: 10px 10px 10px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid grey;
     }
 }

@@ -13,43 +13,53 @@
         padding: 0;
         font-family: 'Rubik', sans-serif;
     }
+
+    #create-event-section{
+        overflow: scroll;
+        /* background-color: red; */
+
+    }
+
+    .top-div-create{
+
+        padding: 15px 15px 0px 5%;
+        display: flex;
+        align-items: center;
+        
+    }
    
     #create-event-parent{
-        margin-top: 10px;
+        /* margin-top: 0px; */
+        min-height: 130vh;
+        max-height: 200vh;
         /* background-color: red; */
-        overflow: hidden;
+        overflow: scroll;
         width: 100vw !important;
+
     }
 
     .create-event-child{
-        width: 100%;
-        margin: 18px 0 0px 0px ;
+        width: 90%;
+        margin:18px 5% 0px 5%;
 
         padding: 15px;
-
-        background-color: whitesmoke;
-        border-top: none;
-        border-left: none;
-        border-right: none;
-
-
-        /* border-radius: 20px; */
-
-      
+        border: 1px solid lightgray;
     }
     ::placeholder {
-        color: black;
-        font-size: 16px;
-        padding: 10px;
+        color: gray;
+        font-size: 13px;
+        padding: 8px 10px 8px 5px;
     }
 
     #event-btn{
         background-color:black ;
         color: white;
         padding: 20px;
-        border-radius: 20px;
+        border-radius: 8px;
         border: none;
         cursor: pointer;
+        width: 90%;
+        font-size: 18px;
         /* margin: 20px; */
     }
 
@@ -57,6 +67,7 @@
         /* background-color: red; */
         margin: 10px 0 !important;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     }

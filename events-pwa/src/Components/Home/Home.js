@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+
+// import { Swiper, SwiperSlide } from "swiper/react";
+
+// import event_img from '../../images/event.jpg'
+import event1 from '../../images/event1.jpg'
+
+import "swiper/css";
+// import "swiper/css/pagination";
+
+// import { Pagination } from "swiper";
 
 
 
 function Home() {
 
     const [myData, setMyData] = useState([]);
+    const [locate, setLocate] = useState([])
 
 
     useEffect(() => {
@@ -35,56 +47,79 @@ function Home() {
         console.log('in edit');
     }
 
+    // const BASE_URL = "https://youtube-v31.p.rapidapi.com";
+
+    const options = {
+        params: {
+            maxResults: "50",
+        },
+        headers: {
+            "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
+            "X-RapidAPI-Host": "youtube-v31.p.rapidapi.com",
+        },
+    };
+
+    const fetchFromAPI = async (url) => {
+        const { data } = await axios.get('https://google-maps-geocoding.p.rapidapi.com/geocode/json', options);
+        console.log(data);
+        return data;
+
+    };
+
 
     return (
-        // "font-size: 30px;padding: 30px 0 0 20px;"
+
         <>
 
-            <div className='top-div'>
-                <h1 style={{ fontSize: "30px", padding: "0 0 4px 0" }}><span style={{ color: "darkblue" }}>All</span> Events</h1>
-                <p style={{ backgroundColor: "lightblue", minWidth: "50vw !important", maxWidth: "53vw", padding: '5px', color: 'darkblue' }}>All your events are here ☺️ </p>
-            </div>
+            <section id='home-section'>
 
-            <div id="parent-event">
 
-                {myData.map(home =>   <div class="parent-event-child">
-                    <h2>{home.event_name}</h2>
-                    <p>event id: {home._id}</p>
-                    <p>{home.event_description}t</p>
-                    <p>{home.event_date}</p>
-                    <p>{home.invitees}</p>
-                    <p>{home.location}</p>
-                    <p>{home.message}</p>
-                    <p>{home.link}</p>
-                 <a href='/editEvents'>  <button onClick={() => console.log('in edit')} id='event-edit-btn'>Edit</button></a> 
-                </div>)}
+                <div className='top-div-home'>
+                    <div >
+                        <h1 style={{ fontSize: "20px", padding: "0 0 0px 0", textAlign: 'left', fontWeight:"bolder"}}>All Events</h1>
+                    </div>
+                    <div style={{  margin: "0 5% 0px 0", borderRadius: "5px", border:"1px solid black", padding: "2.5px 10px 2.5px 10px" }}>
+                        <Link style={{ textAlign: "right", textDecoration: "none", color: "black", fontSize:"20px" }} to={'/create'}> + </Link>
+                    </div>
 
-              
-
-               
-
-                <div class="card card-5">
-                    <div class="card__icon">🏆</div>
-                    <p class="card__exit">※</p>
-                    <div class="text">Ut aliquip ex ea commodo consequat. Duis aute irure dolor</div>
-                    <p class="card__apply">
-                        <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
-                    </p>
                 </div>
 
-                <div class="card card-5">
-                    <div class="card__icon">🏆</div>
-                    <p class="card__exit">※</p>
-                    <div class="text">Ut aliquip ex ea commodo consequat. Duis aute irure dolor</div>
-                    <p class="card__apply">
-                        <a class="card__link" href="#">Apply Now <i class="fas fa-arrow-right"></i></a>
-                    </p>
+                <div id="parent-event">
+
+
+                    {myData.map(home => <Link to={"event"} style={{ textDecoration: "none" }}><div id='event-card'>
+                        <div style={{ borderRadius: "8px" }} ><img id='event_img' src={event1} /></div>
+
+                        <div style={{ zIndex: '2' }} class="content">
+                            <div style={{ display: 'flex', justifyContent: "space-between" }}>
+                                <div style={{ width:"60%"}}>
+                                    <a href="#">
+                                        <span style={{  width: "40%" }} class="title">
+                                            {home.event_name}
+                                        </span>
+                                    </a>
+                                </div>
+                                <div style={{}}>
+                                    <h5 style={{ border: "1px solid lightcoral", color: "lightcoral", textAlign: "center", alignItems: "center", padding: "5px", borderRadius: "5px" }}>Not Approved</h5>
+                                </div>
+
+
+                            </div>
+                            <p class="desc">
+                                {home.event_date}
+                            </p>
+                        </div>
+                    </div></Link>)}
+
+
+
                 </div>
 
-                
 
-            </div>
 
+
+
+            </section>
         </>
 
     )
